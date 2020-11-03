@@ -29,6 +29,14 @@ function draw(){
     context.lineWidth = 3;
     context.strokeStyle = "rgb(0, 250, 0)";
     context.stroke();
+
+    orbs.forEach((orb) => {
+        context.beginPath();
+        context.fillStyle = orb.color;
+        context.arc(orb.locX, orb.locY, orb.radius, 0, 2*Math.PI);
+        context.fill();
+    });
+
     requestAnimationFrame(draw);
 };
 
