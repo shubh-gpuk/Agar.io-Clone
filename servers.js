@@ -1,4 +1,4 @@
-//This file creates express and socket servers
+//This file is not the entry point. It only creates express and socket servers.
 const express = require('express');
 const socketio = require('socket.io');
 const helmet = require('helmet');
