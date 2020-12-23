@@ -1,10 +1,6 @@
 
 // ============DRAWING===========
 
-//random position of the player
-player.locX = Math.floor(500*Math.random() + 100);
-player.locY = Math.floor(500*Math.random() + 100);
-
 function draw(){
 
     //since translate is cumulative, reset it to default
@@ -18,15 +14,19 @@ function draw(){
     const camY = canvas.height/2 - player.locY
     context.translate(camX, camY);
 
-    context.beginPath();
-    context.fillStyle = "rgb(250, 0, 0)";
-    context.arc(player.locX, player.locY, 10, 0, 2*Math.PI);
-    //context.arc(200, 200, 10, 0, 2*Math.PI);
-    context.fill();
-    context.lineWidth = 3;
-    context.strokeStyle = "rgb(0, 250, 0)";
-    context.stroke();
+    playersData.forEach((p) => {
+        //Draw a player
+        context.beginPath();
+        context.fillStyle = p.color;
+        context.arc(p.locX, p.locY, 10, 0, 2*Math.PI);
+        //context.arc(200, 200, 10, 0, 2*Math.PI);
+        context.fill();
+        context.lineWidth = 3;
+        context.strokeStyle = "rgb(0, 250, 0)";
+        context.stroke();
+    })
 
+    
     orbs.forEach((orb) => {
         context.beginPath();
         context.fillStyle = orb.color;
@@ -62,16 +62,7 @@ canvas.addEventListener('mousemove',(event)=>{
         yVector = (1 - ((angleDeg+90)/90));
     }
 
-    speed = 10
-    xV = xVector;
-    yV = yVector;
+    player.xVector = xVector;
+    player.yVector = yVector;
 
-    if((player.locX < 5 && player.xVector < 0) || (player.locX > 500) && (xV > 0)){
-        player.locY -= speed * yV;
-    }else if((player.locY < 5 && yV > 0) || (player.locY > 500) && (yV < 0)){
-        player.locX += speed * xV;
-    }else{
-        player.locX += speed * xV;
-        player.locY -= speed * yV;
-    }
 })

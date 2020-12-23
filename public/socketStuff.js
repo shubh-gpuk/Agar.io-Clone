@@ -10,4 +10,19 @@ function init(){
 
 socket.on('initReturn', (data) => {
     orbs = data.orbs;
+
+    setInterval(() => {
+        socket.emit('tick', {
+            xVector: player.xVector,
+            yVector: player.yVector
+        })
+    }, 33);
+
+})
+
+socket.on('tock', (data) => {
+    //console.log(data.playersData);
+    playersData = data.playersData;     //data.playersData is an array of objects
+    player.locX = data.locX;     //update location of player
+    player.locY = data.locY;     //update location of player
 })
