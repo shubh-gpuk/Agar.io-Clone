@@ -18,7 +18,7 @@ function draw(){
         //Draw a player
         context.beginPath();
         context.fillStyle = p.color;
-        context.arc(p.locX, p.locY, 10, 0, 2*Math.PI);
+        context.arc(p.locX, p.locY, p.radius, 0, 2*Math.PI);
         //context.arc(200, 200, 10, 0, 2*Math.PI);
         context.fill();
         context.lineWidth = 3;
