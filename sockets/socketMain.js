@@ -82,6 +82,7 @@ io.on('connect', (socket) => {
                 orbAdded : orbs[data]
             }
             io.to('game').emit('orbSwitch', orbData)
+            io.to('game').emit('updateLeaderboard', getLeaderboard())
         }).catch(() => {
             //No collision
         })
@@ -90,11 +91,27 @@ io.on('connect', (socket) => {
         killedEnemy.then((data) => {
             //Our player killed enemy
             console.log('Player collision');
+            io.to('game').emit('updateLeaderboard', getLeaderboard());
         }).catch(() => {
             //Our player didn't kill enemy
         })
     })
 })
+
+function getLeaderboard(){
+    playersData.sort((a, b) => {
+        return b.score - a.score;
+    })
+    
+    let leaderboard = playersData.map((playerData) => {
+        return {
+            name: playerData.playerName,
+            score: playerData.score
+        }
+    })
+
+    return leaderboard;
+}
 
 //Run at game start
 function initGame(){

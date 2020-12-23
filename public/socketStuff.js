@@ -34,3 +34,11 @@ socket.on('orbSwitch', (data) => {
     //console.log(data);
     orbs.splice(data.orbIndex, 1, data.orbAdded);
 })
+
+socket.on('updateLeaderboard', (leaders) => {
+    //console.log(data);
+    document.querySelector('.leader-board').innerHTML = ''
+    leaders.forEach((leader) => {
+        document.querySelector('.leader-board').innerHTML += `<li class="leaderboard-player">${leader.name} - ${leader.score}</li>`
+    })
+})
