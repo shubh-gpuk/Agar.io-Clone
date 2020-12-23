@@ -89,11 +89,21 @@ io.on('connect', (socket) => {
 
         const killedEnemy = checkForPlayerCollisions(player.playerData, player.playerConfig, playersData, socket.id);
         killedEnemy.then((data) => {
-            //Our player killed enemy
-            console.log('Player collision');
+            //This player killed enemy
             io.to('game').emit('updateLeaderboard', getLeaderboard());
+            io.to('game').emit('enemyKilled', data);
         }).catch(() => {
-            //Our player didn't kill enemy
+            //This player didn't kill enemy
+        })
+    })
+
+    socket.on('disconnect', (data) => {
+        //Remove player
+        playersData.forEach((playerData, i) => {
+            if(playerData.uid === player.playerData.uid){
+                playersData.splice(i, 1);   
+                io.to('game').emit('updateLeaderboard', getLeaderboard());
+            }
         })
     })
 })

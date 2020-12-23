@@ -42,3 +42,16 @@ socket.on('updateLeaderboard', (leaders) => {
         document.querySelector('.leader-board').innerHTML += `<li class="leaderboard-player">${leader.name} - ${leader.score}</li>`
     })
 })
+
+socket.on('enemyKilled', (data) => {
+    //died killedBy
+    console.log(data);
+    $('#game-message').html(`${data.died.playerName} eaten by ${data.killedBy.playerName}`)
+    //document.querySelector('#game-message').innerHTML = `${data.died} eaten by ${data.killedBy}`
+    $('#game-message').css({
+        'background-color': '#00e6e6',
+        'opacity': 1 
+    })
+    $('#game-message').show()
+    $('#game-message').fadeOut(5000)
+})
