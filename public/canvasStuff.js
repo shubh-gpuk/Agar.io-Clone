@@ -1,6 +1,3 @@
-function init(){
-    draw();
-}
 
 // ============DRAWING===========
 
@@ -24,7 +21,7 @@ function draw(){
     context.beginPath();
     context.fillStyle = "rgb(250, 0, 0)";
     context.arc(player.locX, player.locY, 10, 0, 2*Math.PI);
-    context.arc(200, 200, 10, 0, 2*Math.PI);
+    //context.arc(200, 200, 10, 0, 2*Math.PI);
     context.fill();
     context.lineWidth = 3;
     context.strokeStyle = "rgb(0, 250, 0)";
@@ -48,19 +45,19 @@ canvas.addEventListener('mousemove',(event)=>{
     };
     const angleDeg = Math.atan2(mousePosition.y - (canvas.height/2), mousePosition.x - (canvas.width/2)) * 180 / Math.PI;
     if(angleDeg >= 0 && angleDeg < 90){
-        console.log("lower-right");
+        //console.log("lower-right");
         xVector = 1 - (angleDeg/90);
         yVector = -(angleDeg/90);
     }else if(angleDeg >= 90 && angleDeg <= 180){
-        console.log("lower-left");
+        //console.log("lower-left");
         xVector = -(angleDeg-90)/90;
         yVector = -(1 - ((angleDeg-90)/90));
     }else if(angleDeg >= -180 && angleDeg < -90){
-        console.log("upper-left");
+        //console.log("upper-left");
         xVector = (angleDeg+90)/90;
         yVector = (1 + ((angleDeg+90)/90));
     }else if(angleDeg < 0 && angleDeg >= -90){
-        console.log("upper-right");
+        //console.log("upper-right");
         xVector = (angleDeg+90)/90;
         yVector = (1 - ((angleDeg+90)/90));
     }

@@ -21,11 +21,16 @@ const settings = {
 initGame();
 
 io.on('connect', (socket) => {
-    socket.emit('init', {orbs});
 
-    const playerConfig = new PlayerConfig(settings);
-    const playerData = new PlayerData(null, settings);
-    const player = new Player(socket.id, playerConfig, playerData);
+    socket.on('init', ({playerName}) => {
+        const playerConfig = new PlayerConfig(settings);
+        const playerData = new PlayerData(playerName, settings);
+        console.log(playerData);
+        const player = new Player(socket.id, playerConfig, playerData);
+
+        socket.emit('initReturn', {orbs});
+
+    });
 })
 
 //Run at game start
